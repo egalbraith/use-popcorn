@@ -213,6 +213,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatch, watched }) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
+
   const isWatched = watched.map((movie) => movie.imdbID).includes(movie.imdbID);
   const watchedUserRating = watched.find(
     (movie) => movie.imdbID === selectedId
@@ -258,6 +259,16 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatch, watched }) {
       getMovieDetails();
     },
     [selectedId]
+  );
+
+  useEffect(
+    function () {
+      if (!title) {
+        return;
+      }
+      document.title = `Movie | ${title}`;
+    },
+    [title]
   );
 
   return (
